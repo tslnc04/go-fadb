@@ -17,9 +17,16 @@ func usage() { fmt.Print(usageText) }
 func main() {
 	switch flag.Arg(0) {
 	case "check", "c":
-		println("would check")
+		_, err = fadb.Load(flag.Arg(1))
+		if err != nil {
+			panic(err)
+		}
 	case "flat", "f":
-		println("would flatten")
+		flat, err = fadb.Flat(flag.Arg(1))
+		if err != nil {
+			panic(err)
+		}
+		println(flat)
 	default:
 		usage()
 	}
