@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/fadb/go-fadb"
+	//"github.com/fadb/go-fadb"
 )
 
 const usageText = `usage:
