@@ -1,10 +1,10 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
 
-	//"github.com/fadb/go-fadb"
+	"github.com/fadb/go-fadb"
 )
 
 const usageText = `usage:
@@ -15,14 +15,14 @@ const usageText = `usage:
 func usage() { fmt.Print(usageText) }
 
 func main() {
-	switch flag.Arg(0) {
+	switch os.Args[1] {
 	case "check", "c":
-		_, err = fadb.Load(flag.Arg(1))
+		_, err := fadb.Load(os.Args[2])
 		if err != nil {
 			panic(err)
 		}
 	case "flat", "f":
-		flat, err = fadb.Flat(flag.Arg(1))
+		flat, err := fadb.Flat(os.Args[2])
 		if err != nil {
 			panic(err)
 		}
