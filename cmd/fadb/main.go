@@ -8,8 +8,12 @@ import (
 )
 
 const usageText = `usage:
-  fadb check FADB      - validates FADB
-  fadb flat  FADB      - outputs flattened key = value pairs
+  fadb                         - interactive mode
+  fadb make  [PROTOTYPE] NAME  - clones a new PROTOTYPE to NAME
+  fadb check [FADB]            - validates FADB
+  fadb flat  [FADB]            - outputs flattened key = value pairs
+
+If ommitted FADB is assumed to be the current working directory.
 `
 
 func usage() { fmt.Print(usageText) }

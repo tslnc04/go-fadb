@@ -1,6 +1,6 @@
 package fadb
 
 type pair struct {
-	Key   string
+	Name  string
 	Value interface{}
 }
