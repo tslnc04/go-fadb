@@ -1,0 +1,54 @@
+package fadb
+
+import (
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+
+	"github.com/mitchellh/go-homedir"
+)
+
+const (
+	validNameChars = `[a-zA-Z_][a-zA-Z0-9_-]*`
+	protoNameChars = `[A-Z][a-zA-Z0-9_-]*`
+)
+
+var validNameX = regexp.MustCompile(`^` + validNameChars + `$`)
+var protoNameX = regexp.MustCompile(`^` + protoNameChars + `$`)
+
+var home, _ = homedir.Dir()
+
+var defaultPath = []string{
+	filepath.Join(home, `fadb`),
+	filepath.Join(home, `_fadb`),
+	filepath.Join(home, `.fadb`),
+}
+
+var fadbpath []string
+
+func buildPath() {
+	env := os.Getenv(`FADBPATH`)
+	if env != "" {
+		fadbpath = strings.Split(env, `:`)
+	}
+	fadbpath = append(fadbpath,
+		filepath.Join(home, "fadb"),
+		filepath.Join(home, "_fadb"),
+		filepath.Join(home, ".fadb"),
+		filepath.Join(home, "data"),
+		filepath.Join(home, "_data"),
+		filepath.Join(home, ".data"),
+		"/var/fadb/data",
+		"/usr/var/fadb/data",
+		"/var/data",
+		"/usr/var/data",
+		"/usr/share/fadb/data",
+	)
+
+}
+
+// init is automatically called when fadb is imported
+func init() {
+	buildPath()
+}

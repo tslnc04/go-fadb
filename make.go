@@ -19,7 +19,10 @@ func Make(args []string) error {
 	if proto == "" {
 		println("... after we find the prototype")
 	} else {
+		var path string
+		path = Find(proto)
 		println(" a", proto)
+		println(path)
 	}
 
 	return nil
