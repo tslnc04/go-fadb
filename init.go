@@ -44,6 +44,8 @@ func buildPath() {
 		"/var/data",
 		"/usr/var/data",
 		"/usr/share/fadb/data",
+		//TODO add the windows data paths
+		//TODO add the mac data paths
 	)
 
 }

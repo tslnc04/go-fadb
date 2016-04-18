@@ -9,11 +9,12 @@ import (
 
 const usageText = `usage:
   fadb                         - interactive mode
-  fadb make  [PROTOTYPE] NAME  - clones a new PROTOTYPE to NAME
-  fadb make  NAME [PROTOTYPE]  - clones a new PROTOTYPE to NAME
-  fadb check [FADB]            - validates FADB
-  fadb flat  [FADB]            - outputs flattened key = value pairs
-  fadb which POINTER           - prints the full path to the POINTER
+  fadb make    [PROTOTYPE] NAME  - clones a new PROTOTYPE to NAME
+  fadb make    NAME [PROTOTYPE]  - clones a new PROTOTYPE to NAME
+  fadb check   [FADB]            - validates FADB
+  fadb flat    [FADB]            - outputs flattened key = value pairs
+  fadb which   POINTER           - prints the full path to the POINTER
+  fadb compose                   - composes current location
 
 If ommitted FADB is assumed to be the current working directory.
 `
