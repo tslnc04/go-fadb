@@ -14,7 +14,7 @@ const usageText = `usage:
   fadb check   [FADB]            - validates FADB
   fadb flat    [FADB]            - outputs flattened key = value pairs
   fadb which   POINTER           - prints the full path to the POINTER
-  fadb compose                   - composes current location
+  fadb compose [COMPOSITION]     - composes COMPOSITION or current
 
 If ommitted FADB is assumed to be the current working directory.
 `
