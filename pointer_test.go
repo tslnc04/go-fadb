@@ -5,9 +5,9 @@ import (
 	"github.com/fadb/go-fadb"
 )
 
-func ExamplePathFrom() {
-	fmt.Println(fadb.PathFrom("sample.pointer.right-here"))
+func ExampleFileFrom() {
+	fmt.Println(fadb.FileFrom("sample.persons.robmuh"))
 
 	// Output:
-	// sample/pointer.toml
+	// sample/persons/robmuh/_.toml
 }

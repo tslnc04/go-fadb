@@ -19,18 +19,12 @@ var protoNameX = regexp.MustCompile(`^` + protoNameChars + `$`)
 
 var home, _ = homedir.Dir()
 
-var defaultPath = []string{
-	filepath.Join(home, `fadb`),
-	filepath.Join(home, `_fadb`),
-	filepath.Join(home, `.fadb`),
-}
-
-var SearchPath []string
+var SearchPath = []string{"."}
 
 func buildPath() {
 	env := os.Getenv(`FADBPATH`)
 	if env != "" {
-		SearchPath = strings.Split(env, `:`)
+		SearchPath = append(SearchPath, strings.Split(env, `:`)...)
 	}
 	SearchPath = append(SearchPath,
 		filepath.Join(home, "fadb"),
