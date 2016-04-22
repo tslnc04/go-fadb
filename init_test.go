@@ -1,9 +1,9 @@
-package init_test
+package fadb_test
 
 import (
-//"github.com/fadb/go-fadb"
+	"github.com/fadb/go-fadb"
 )
 
 func ExampleSearchPath() {
-	//println(fadb.SearchPath)
+	println(fadb.SearchPath)
 }
