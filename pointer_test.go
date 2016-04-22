@@ -1,11 +1,12 @@
 package pointer_test
 
 import (
-	"fmt"
+//"fmt"
+//f "github.com/fadb/go-fadb"
 )
 
 func ExamplePathFrom() {
-	fmt.Println(fadb.PathFrom("sample.pointer.right-here"))
+	//fmt.Println(f.PathFrom("sample.pointer.right-here"))
 
 	// Output:
 	// sample/pointer.toml

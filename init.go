@@ -25,14 +25,14 @@ var defaultPath = []string{
 	filepath.Join(home, `.fadb`),
 }
 
-var fadbpath []string
+var SearchPath []string
 
 func buildPath() {
 	env := os.Getenv(`FADBPATH`)
 	if env != "" {
-		fadbpath = strings.Split(env, `:`)
+		SearchPath = strings.Split(env, `:`)
 	}
-	fadbpath = append(fadbpath,
+	SearchPath = append(SearchPath,
 		filepath.Join(home, "fadb"),
 		filepath.Join(home, "_fadb"),
 		filepath.Join(home, ".fadb"),
