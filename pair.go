@@ -1,6 +1,6 @@
 package fadb
 
-type pair struct {
+type Pair struct {
 	Name  string
 	Value interface{}
 }
