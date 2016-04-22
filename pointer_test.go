@@ -2,8 +2,6 @@ package pointer_test
 
 import (
 	"fmt"
-
-	"github.com/fadb/go-fadb"
 )
 
 func ExamplePathFrom() {
