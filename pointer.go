@@ -78,6 +78,14 @@ func LocalFileFor(pointer string) string {
 	return ""
 }
 
+// LocalFilesFor is plural version of FileFor
+func LocalFilesFor(pointers ...string) (files []string) {
+	for _, p := range pointers {
+		files = append(files, LocalFileFor(p))
+	}
+	return
+}
+
 // AllFor calls LocalFor on everything in SearchPath
 func AllFor(pointer string) (paths []string) {
 	for _, path := range SearchPath {
@@ -106,4 +114,12 @@ func FileFor(pointer string) string {
 		}
 	}
 	return ""
+}
+
+// FilesFor is plural version of FileFor
+func FilesFor(pointers ...string) (files []string) {
+	for _, p := range pointers {
+		files = append(files, FileFor(p))
+	}
+	return
 }
