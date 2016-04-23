@@ -9,13 +9,28 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
-const (
-	validNameChars = `[a-zA-Z_][a-zA-Z0-9_-]*`
-	protoNameChars = `[A-Z][a-zA-Z0-9_-]*`
-)
+//---------------------------- Valid Names ----------------------------
+
+const validNameChars = `[a-zA-Z_][a-zA-Z0-9_-]*`
+const protoNameChars = `[A-Z][a-zA-Z0-9_-]*`
 
 var validNameX = regexp.MustCompile(`^` + validNameChars + `$`)
 var protoNameX = regexp.MustCompile(`^` + protoNameChars + `$`)
+
+//--------------------------- File Suffixes ---------------------------
+
+var AllFileSuffixes = []string{} // built at init()
+var ObjectFileSuffixes = []string{"toml", "json"}
+var ListFileSuffixes = []string{"list", "array"}
+var TrueFileSuffixes = []string{"true", "on"}
+var TableFileSuffixes = []string{"csv", "tsv", "dsv"}
+var TextFileSuffixes = []string{
+	"md", "mdown", "mdkn", "mkd", "mdwn", "mdtxt", "mdtext",
+	"markdown", "mark", "text", "txt", "rst", "html", "asc",
+}
+var HaveObjectSuffixes = []string{} // built at init()
+
+//---------------------------- Search Path ----------------------------
 
 var home, _ = homedir.Dir()
 
@@ -44,7 +59,14 @@ func buildPath() {
 
 }
 
-// init is automatically called when fadb is imported
 func init() {
+	AllFileSuffixes = append(AllFileSuffixes, ObjectFileSuffixes...)
+	AllFileSuffixes = append(AllFileSuffixes, ListFileSuffixes...)
+	AllFileSuffixes = append(AllFileSuffixes, TableFileSuffixes...)
+	AllFileSuffixes = append(AllFileSuffixes, TrueFileSuffixes...)
+	AllFileSuffixes = append(AllFileSuffixes, TextFileSuffixes...)
+	HaveObjectSuffixes = append(HaveObjectSuffixes, ObjectFileSuffixes...)
+	HaveObjectSuffixes = append(HaveObjectSuffixes, TableFileSuffixes...)
+	HaveObjectSuffixes = append(HaveObjectSuffixes, TrueFileSuffixes...)
 	buildPath()
 }

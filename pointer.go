@@ -22,8 +22,59 @@ func dirExists(path string) bool {
 	return true
 }
 
-// PathFrom resolves an FADB pointer to its actual file system path.
-func FileFrom(pointer string) (path string) {
+// LocalFor returns local files that would be searched.
+func LocalFor(pointer string) (paths []string) {
+	var suf, base string
+	p := strings.Split(pointer, ".")
+
+	base = fp.Join(p...)
+	for _, suf = range ObjectFileSuffixes {
+		paths = append(paths, fp.Join(base, "_."+suf))
+	}
+	for _, suf = range AllFileSuffixes {
+		paths = append(paths, base+"."+suf)
+	}
+
+	base = fp.Join(p[:len(p)-1]...)
+	for _, suf = range ObjectFileSuffixes {
+		paths = append(paths, fp.Join(base, "_."+suf))
+	}
+	for _, suf = range HaveObjectSuffixes {
+		paths = append(paths, base+"."+suf)
+	}
+
+	for i := len(p) - 2; i > 0; i-- {
+		base = fp.Join(p[:i]...)
+		for _, suf = range ObjectFileSuffixes {
+			paths = append(paths, fp.Join(base, "_."+suf))
+		}
+		for _, suf = range ObjectFileSuffixes {
+			paths = append(paths, base+"."+suf)
+		}
+	}
+	for _, suf = range ObjectFileSuffixes {
+		paths = append(paths, "_."+suf)
+	}
+	return
+}
+
+// AllFor calls LocalFor on everything in SearchPath
+func AllFor(pointer string) (paths []string) {
+	for _, path := range SearchPath {
+		for _, local := range LocalFor(pointer) {
+			paths = append(paths, fp.Join(path, local))
+		}
+	}
+	return
+}
+
+// FoundFor is the same as AllFor but only returns files that exist.
+func FoundFor(pointer string) (paths []string) {
+	return
+}
+
+// FileFor returns the first file that matches a given pointer.
+func FileFor(pointer string) (path string) {
 	p := strings.Split(pointer, ".")
 	for _, r := range SearchPath {
 		if !dirExists(r) {
