@@ -5,32 +5,13 @@ import (
 	"github.com/fadb/go-fadb"
 )
 
-/*
-func ExampleLocalFileFor() {
-}
-func ExampleFileFor() {
-	fmt.Println(fadb.FileFor("sample.persons.robmuh"))
-
-	// Output:
-	// sample/persons/robmuh/_.toml
-}
-
-func ExampleAllFoundFor() {
-	fmt.Println(fadb.FoundFor("sample.persons.robmuh"))
-}
-
-func ExampleLocalFoundFor() {
-	fmt.Println(fadb.FoundFor("sample.persons.robmuh"))
-}
-
-*/
+//------------------------------- Local -------------------------------
 
 func ExampleLocalFor() {
 	files := fadb.LocalFor("sample.summer.persons.robmuh")
 	for _, p := range files {
 		fmt.Println(p)
 	}
-
 	// Output:
 	// sample/summer/persons/robmuh/_.toml
 	// sample/summer/persons/robmuh/_.json
@@ -78,9 +59,46 @@ func ExampleLocalFor() {
 	// _.json
 }
 
+func ExampleLocalFoundFor() {
+	files := fadb.LocalFoundFor("sample.summer.persons.betropper")
+	for _, p := range files {
+		fmt.Println(p)
+	}
+	// Output:
+	// sample/summer/persons/betropper/_.toml
+	// sample/summer/persons/betropper.toml
+}
+
+func ExampleLocalFileFor() {
+	file := fadb.LocalFileFor("sample.summer.persons.betropper")
+	fmt.Println(file)
+	// Output:
+	// sample/summer/persons/betropper/_.toml
+}
+
+//------------------------------- Local -------------------------------
+
 func ExampleAllFor() {
 	files := fadb.AllFor("sample.summer.persons.robmuh")
 	for _, p := range files {
 		fmt.Println(p)
 	}
+	// no output because it varies per system
+}
+
+func ExampleAllFoundFor() {
+	files := fadb.AllFoundFor("sample.summer.persons.betropper")
+	for _, p := range files {
+		fmt.Println(p)
+	}
+	// Output:
+	// sample/summer/persons/betropper/_.toml
+	// sample/summer/persons/betropper.toml
+}
+
+func ExampleFileFor() {
+	file := fadb.FileFor("sample.summer.persons.betropper")
+	fmt.Println(file)
+	// Output:
+	// sample/summer/persons/betropper/_.toml
 }

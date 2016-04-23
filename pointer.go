@@ -58,6 +58,26 @@ func LocalFor(pointer string) (paths []string) {
 	return
 }
 
+// LocalFoundFor returns all the LocalFor files that actually exist
+func LocalFoundFor(pointer string) (paths []string) {
+	for _, l := range LocalFor(pointer) {
+		if fileExists(l) {
+			paths = append(paths, l)
+		}
+	}
+	return
+}
+
+// LocalFileFor returns the first local file found for the pointer
+func LocalFileFor(pointer string) string {
+	for _, l := range LocalFor(pointer) {
+		if fileExists(l) {
+			return l
+		}
+	}
+	return ""
+}
+
 // AllFor calls LocalFor on everything in SearchPath
 func AllFor(pointer string) (paths []string) {
 	for _, path := range SearchPath {
@@ -68,46 +88,21 @@ func AllFor(pointer string) (paths []string) {
 	return
 }
 
-// FoundFor is the same as AllFor but only returns files that exist.
-func FoundFor(pointer string) (paths []string) {
+// AllFoundFor is the same as AllFor but only returns files that exist.
+func AllFoundFor(pointer string) (paths []string) {
+	for _, l := range AllFor(pointer) {
+		if fileExists(l) {
+			paths = append(paths, l)
+		}
+	}
 	return
 }
 
-// FileFor returns the first file that matches a given pointer.
-func FileFor(pointer string) (path string) {
-	p := strings.Split(pointer, ".")
-	for _, r := range SearchPath {
-		if !dirExists(r) {
-			continue
-		}
-		cur := r
-		for _, fd := range p {
-			cur = fp.Join(cur, fd)
-			toml := cur + ".toml"
-			json := cur + ".json"
-			if fileExists(toml) {
-				return toml
-			}
-			if fileExists(json) {
-				return json
-			}
-			if dirExists(cur) {
-				toml := fp.Join(cur, "_.toml")
-				json := fp.Join(cur, "_.json")
-				if fileExists(toml) {
-					return toml
-				}
-				if fileExists(json) {
-					return json
-				}
-				//TODO check for list files
-				//TODO check for true files
-				//TODO check for on files
-				//TODO check for tsv files
-				//TODO check for dsv files
-				//TODO check for csv files
-				//TODO check for text files beginning
-			}
+// FileFor returns the first of all files that matches a given pointer.
+func FileFor(pointer string) string {
+	for _, l := range AllFor(pointer) {
+		if fileExists(l) {
+			return l
 		}
 	}
 	return ""
